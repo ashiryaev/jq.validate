@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+		<script src="js/jquery.js"></script>
+		<script src="js/jq.validate.js"></script>
+		<script>
+			/*$(function() {
+				$('a').live('click', function() {
+					alert('q');
+				});
+				document.getElementById('ret').innerHTML = '<a href="#">7</a>';
+			});*/
+			function ret() {
+				var a = {z:3};
+				return a;
+			}
+
+			console.log(ret());
+		</script>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+	  <div id=""></div>
+<div>
+	<a href="#">1</a><br/>
+	<a href="#">2</a><br/>
+	<a href="#">3</a><br/>
+	<a href="#">4</a><br/>
+	<span id="ret"></span>
+    <form id="editFileTypeForm">
+		<input name="name1" value=""/> <br/>
+		<input class="oneRequired" name="name2[]" value=""/> <br/>
+		<input class="oneRequired" name="name2[]" value=""/> <br/>
+		<input type="submit" value="Submit"/>
+	</form>
+</div>
+  </body>
+</html>
