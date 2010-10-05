@@ -4,18 +4,34 @@
 		<script src="js/jquery.js"></script>
 		<script src="js/jq.validate.js"></script>
 		<script>
-			/*$(function() {
-				$('a').live('click', function() {
-					alert('q');
-				});
-				document.getElementById('ret').innerHTML = '<a href="#">7</a>';
-			});*/
-			function ret() {
+			$(function(){
+				$('#editFileTypeForm').validate({onsubmit:false});
+			})
+			
+			/*function ret() {
 				var a = {z:3};
 				return a;
 			}
 
-			console.log(ret());
+			//console.log(ret());
+
+			var validation = $('#editProgramForm').validate({
+				fields: {
+					url: {
+						rules: {required: true, url: true},
+						type: 'multi',
+						message: {
+							required: 'This field is required.',
+							url: 'Invalid url.'
+						}
+					}
+				},
+				onsubmit: true,
+				errorPlacement: function(error, element) {
+					error.appendTo(element.prev());
+				}
+			});*/
+
 		</script>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

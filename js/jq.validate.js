@@ -1,29 +1,52 @@
 (function($){
 
-$.extend($.fn, {
-	validate: function(options) {
-		var validator = new $.validator(options, this[0]);
+var validation = {
+	defaults: {
+		errorClass: 'error',
+		errorElement: 'label',
+		onsubmit: true
+	}
+}
 
-		var superValidator = new $.superValidator();
-		superValidator.addValidator(validator);
+$.extend($.fn, {
+	validate: function(settings) {
+		//var formValidator = new $.formValidator(settings, this);
+		//save validator data
+		//this.data('validator', formValidator);
+		//form handlers
+		var options = $.extend({}, validation.defaults, settings);
+		if (options.onsubmit) {
+			this.submit(function() {
+				if ($(this).form()) {
+					if ( options.submitHandler ) {
+						return options.submitHandler.call( null, validator.currentForm );
+					}
+					return true;
+				}	
+				return false;
+			});
+		}
+	},
+	validateForm: function() {
+		
 	}
 });
 
 // constructor for validator
-$.validator = function( options, form ) {
-	this.settings = $.extend($.validator.defaults, options );
+$.formValidator = function( options, form ) {
+	this.settings = $.extend($.formValidator.defaults, options );
 	this.currentForm = form;
 	this.init();
 };
 
-$.extent($.validator, {
+$.extent($.formValidator, {
 	defaults: {
 		fields: {},
 		errorClass: "error",
 		errorElement: "label"
 	},
 	setDefaults: function(settings) {
-		$.extend( $.validator.defaults, settings );
+		$.extend( $.formValidator.defaults, settings );
 	},
 	messages: {
 		required: "This field is required.",
@@ -53,17 +76,6 @@ $.extent($.validator, {
 	}
 	
 })
-
-//constructor for supervalidator
-$.superValidator = function() {}
-$.extend($.superValidator, {
-	prototype: {
-		addValidator: function(validator) {
-			//@todo
-		}
-	}
-});
-
 
 })(jQuery)
 
