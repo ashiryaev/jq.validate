@@ -1,11 +1,41 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-		<script src="js/jquery.js"></script>
+		<script src="js/jquery-nightly.js"></script>
 		<script src="js/jq.validate.js"></script>
 		<script>
 			$(function(){
-				$('#editFileTypeForm').validate({onsubmit:false});
+
+				$('#form2').validate({
+					onsubmit:true,
+					submitHandler: function() {
+						//console.log(this);
+						//alert($(this).attr('id'));
+						return false;
+					},
+					errorPlacement: function(label, error) {
+						
+					},
+					fields: {
+						url: {
+							rules: {required: true, url: true},
+							type: 'multi',
+							messages: {
+								required: 'This field is required.',
+								url: 'Invalid url.'
+							}
+						},
+						email: {
+							rules: {required: true, email:true},
+							messages: {
+								required: 'This field is required.',
+							}
+						},
+						firstname: {
+							rules: {required: true}
+						}
+					}
+				});
 			})
 			
 			/*function ret() {
@@ -44,12 +74,20 @@
 	<a href="#">3</a><br/>
 	<a href="#">4</a><br/>
 	<span id="ret"></span>
-    <form id="editFileTypeForm">
+    <form id="form1">
 		<input name="name1" value=""/> <br/>
-		<input class="oneRequired" name="name2[]" value=""/> <br/>
-		<input class="oneRequired" name="name2[]" value=""/> <br/>
 		<input type="submit" value="Submit"/>
 	</form>
+	<form id="form2">
+		<input name="url[]" value=""/> <br/>
+		<input name="url[]" value=""/> <br/>
+		<input name="url[]" value=""/> <br/>
+
+		<input name="email" value=""/> <br/>
+		<input name="firstname" value=""/> <br/>
+		<input type="submit" value="Submit"/>
+	</form>
+	<button onclick="$('#form2').validateForm(); return false;">Form</button>
 </div>
   </body>
 </html>
