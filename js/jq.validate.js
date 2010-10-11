@@ -2,7 +2,7 @@
 
 var validation = {
 	defaults: {
-		onsubmit: false
+		onsubmit: true
 	}
 }
 
@@ -45,6 +45,8 @@ $.extend($.formValidator, {
 	defaults: {
 		errorClass: 'jqValidateError',
 		errorElement: 'div',
+		errorColor: 'red',
+		errorFontSize: 11,
 		fields: {}
 	},
 	setDefaults: function(settings) {
@@ -121,11 +123,18 @@ $.extend($.formValidator, {
 				message = $.formValidator.messages[error];
 			}
 
-			var label = $("<" + this.settings.errorElement + "/>")
+			var options = this.currentForm.data('options');
+			if (options.errorPlacement) {
+				options.errorPlacement.call(this, element, message)
+			}
+			else {
+				var label = $("<" + this.settings.errorElement + "/>")
 					.addClass(this.settings.errorClass)
 					.html(message);
-			var options = this.currentForm.data('options');
-			options.errorPlacement?options.errorPlacement.call(this, label, element):label.insertAfter(element);
+				label.css({'position': 'absolute', 'font-size': this.settings.errorFontSize, 'color': this.settings.errorColor});
+
+				label.insertAfter(element);
+			}
 		},
 		prepareForm: function() {
 			this.hideErrors();
