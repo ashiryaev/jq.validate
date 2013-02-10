@@ -50,6 +50,4 @@ class Validator implements Observable {
 	}
 }
 
-$Validator = new Validator();
-$Validator->addObserver(new ErrorLogger(), Validator::EMAIL_INVALID);
 
